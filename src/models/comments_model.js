@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const commentSchema = new mongoose.Schema({
   postId: { type: Number, required: true },
@@ -6,4 +6,6 @@ const commentSchema = new mongoose.Schema({
   content: { type: String, required: true },
 });
 
-export const Comment = mongoose.model("Comment", commentSchema);
+const commentModel = mongoose.model("Comment", commentSchema);
+
+module.exports = commentModel;

@@ -1,6 +1,6 @@
-const { Comment } = require("../models/comments_model");
+const commentsModel = require("../models/comments_model");
 
-export async function createComment(req, res) {
+async function createComment(req, res) {
   const { postId, author, content } = req.body;
 
   if (!postId || !author || !content) {
@@ -10,7 +10,7 @@ export async function createComment(req, res) {
   }
 
   try {
-    const newComment = new Comment({ postId, author, content });
+    const newComment = new commentsModel({ postId, author, content });
     await newComment.save();
     res.status(201).json(newComment);
   } catch (err) {
@@ -18,30 +18,30 @@ export async function createComment(req, res) {
   }
 }
 
-export async function getComments(req, res) {
+async function getComments(req, res) {
   try {
-    const comments = await Comment.find();
+    const comments = await commentsModel.find();
     res.json(comments);
   } catch (err) {
     res.status(500).json({ error: "Error retrieving comments." });
   }
 }
 
-export async function getCommentsByPost(req, res) {
+async function getCommentsByPost(req, res) {
   const { postId } = req.params;
 
   try {
-    const postComments = await Comment.find({ postId });
+    const postComments = await commentsModel.find({ postId });
     res.json(postComments);
   } catch (err) {
     res.status(500).json({ error: "Error retrieving comments." });
   }
 }
 
-export async function getCommentById(req, res) {
+async function getCommentById(req, res) {
   const { id } = req.params;
   try {
-    const comment = await Comment.findById(id);
+    const comment = await commentsModel.findById(id);
 
     if (!comment) {
       return res.status(404).json({ error: "Comment not found." });
@@ -53,7 +53,7 @@ export async function getCommentById(req, res) {
   }
 }
 
-export async function updateComment(req, res) {
+async function updateComment(req, res) {
   const { id } = req.params;
   const { postId, author, content } = req.body;
 
@@ -64,7 +64,7 @@ export async function updateComment(req, res) {
   }
 
   try {
-    const updatedComment = await Comment.findByIdAndUpdate(
+    const updatedComment = await commentsModel.findByIdAndUpdate(
       id,
       { postId, author, content },
       { new: true, runValidators: true }
@@ -80,11 +80,11 @@ export async function updateComment(req, res) {
   }
 }
 
-export async function deleteComment(req, res) {
+async function deleteComment(req, res) {
   const { id } = req.params;
 
   try {
-    const deletedComment = await Comment.findByIdAndDelete(id);
+    const deletedComment = await commentsModel.findByIdAndDelete(id);
 
     if (!deletedComment) {
       return res.status(404).json({ error: "Comment not found." });
@@ -95,3 +95,12 @@ export async function deleteComment(req, res) {
     res.status(500).json({ error: "Error deleting comment." });
   }
 }
+
+module.exports = {
+  createComment,
+  getComments,
+  getCommentsByPost,
+  getCommentById,
+  updateComment,
+  deleteComment,
+};

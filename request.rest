@@ -1,0 +1,43 @@
+GET http://localhost:8080/posts
+
+###
+
+GET http://localhost:8080/posts/post?sender=Ori
+
+###
+
+GET http://localhost:8080/posts/679172653f6aaab6e8c1a04c
+
+###
+
+GET http://localhost:8080/posts/6791734c9acb01965bd9bf1a
+
+###
+
+POST http://localhost:8080/posts
+Content-Type: application/json
+
+{
+    "title": "Hello",
+    # "sender": "Yaakov", 
+    "content": "Hello my friend"
+}
+
+###
+
+GET http://localhost:8080/comments/comments
+
+###
+
+GET http://localhost:8080/comments/post/679172653f6aaab6e8c1a04c
+
+### 
+
+POST http://localhost:8080/comments/
+Content-Type: application/json
+
+{
+    "postId": "679172653f6aaab6e8c1a04c",
+    "author": "Ori",
+    "content": "Hello to you too"
+}
