@@ -6,7 +6,7 @@ dotenv.config();
 
 const PORT = process.env.PORT || 3000;
 
-const MONGO_URL = process.env.MONGO_URL;
+export const MONGO_URL = process.env.MONGO_URL
 
 mongoose
   .connect(`${MONGO_URL}/commentsAPI`, {
@@ -17,5 +17,7 @@ mongoose
   .catch((err) => console.error("Could not connect to MongoDB", err));
 
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+module.exports = app;
