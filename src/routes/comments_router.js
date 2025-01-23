@@ -1,7 +1,15 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { createComment, getComments, getCommentsByPost, getCommentById, updateComment, deleteComment } = require('./comments/controller');
+const {
+  createComment,
+  getComments,
+  getCommentsByPost,
+  getCommentById,
+  updateComment,
+  deleteComment,
+} = require("../controllers/comments_controller");
 const { authenticateToken } = require('../middlewares/auth');
+
 
 /**
  * @swagger
@@ -19,7 +27,7 @@ const { authenticateToken } = require('../middlewares/auth');
  *       201:
  *         description: Comment created successfully
  */
-router.post('/comments', authenticateToken, createComment);
+router.post("/", authenticateToken, createComment);
 
 /**
  * @swagger
@@ -31,7 +39,7 @@ router.post('/comments', authenticateToken, createComment);
  *       200:
  *         description: List of all comments
  */
-router.get('/comments', authenticateToken, getComments);
+router.get("/all", authenticateToken, getComments);
 
 /**
  * @swagger
@@ -50,7 +58,7 @@ router.get('/comments', authenticateToken, getComments);
  *       200:
  *         description: Comments for the specified post
  */
-router.get('/comments/post/:postId', authenticateToken, getCommentsByPost);
+router.get("/post/:postId", authenticateToken, getCommentsByPost);
 
 /**
  * @swagger
@@ -69,7 +77,7 @@ router.get('/comments/post/:postId', authenticateToken, getCommentsByPost);
  *       200:
  *         description: Comment retrieved successfully
  */
-router.get('/comments/:id', authenticateToken, getCommentById);
+router.get("/:id", authenticateToken, getCommentById);
 
 /**
  * @swagger
@@ -94,7 +102,7 @@ router.get('/comments/:id', authenticateToken, getCommentById);
  *       200:
  *         description: Comment updated successfully
  */
-router.put('/comments/:id', authenticateToken, updateComment);
+router.put("/:id", authenticateToken, updateComment);
 
 /**
  * @swagger
@@ -113,6 +121,6 @@ router.put('/comments/:id', authenticateToken, updateComment);
  *       200:
  *         description: Comment deleted successfully
  */
-router.delete('/comments/:id', authenticateToken, deleteComment);
+router.delete("/:id", authenticateToken, deleteComment);
 
 module.exports = router;

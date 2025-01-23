@@ -1,5 +1,6 @@
-const express = require('express');
-const comment_router = require('./comments/router');
+const express = require("express");
+const posts_router = require("./routes/posts_router");
+const comments_router = require("./routes/comments_router");
 const app = express();
 
 const swaggerOptions = {
@@ -24,6 +25,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.use(express.json());
 
-app.use('/comment', comment_router);
+app.use("/posts", posts_router);
+app.use("/comments", comments_router);
 
 module.exports = app;
