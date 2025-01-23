@@ -2,7 +2,6 @@ const postModel = require("../models/posts_model");
 
 const createPost = async (req, res) => {
   const { title, content, sender } = req.body;
-  console.log(req.body);
 
   if (!title || !sender) {
     return res
@@ -28,7 +27,6 @@ const getAllPosts = async (req, res) => {
 
 const getAllPostsBySender = async (req, res) => {
   const { sender } = req.query;
-  console.log(sender);
 
   if (!sender) {
     return res.status(400).json({ error: "sender is required for this route" });
